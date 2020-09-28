@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+
+    node:
+        build: ./docker/node
+        env_file: .env
+        user: "${UID}:${GID}"
+        stdin_open: true
+        working_dir: /usr/src/app
+        volumes:
+            - ./client:/usr/src/app
+        ports:
+            - "${PORT}:${PORT}"
+
+    golang:
+        build: ./docker/golang 
+        env_file: .env
+        volumes:
+            - ./server:/go/src/app
+        ports:
+            - "${WEB_PORT}:${WEB_PORT}"
+            - "${TRACE_PORT}:${TRACE_PORT}"
+
+    redis:
+        build: ./docker/redis 
+        expose:
+            - "6379"
+        volumes:
+            - "redis:/data"
+
+volumes: 
+    redis:
