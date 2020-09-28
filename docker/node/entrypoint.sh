@@ -5,8 +5,11 @@ if [ ! -f "package.json" ]; then
     else
         npx create-react-app .
     fi
+    jq '.proxy="http://golang:3000"' package.json | sponge package.json
 else
-    npm i
+    if [ ! -d "node_modules" ]; then
+        yarn
+    fi
 fi
 
 exec "$@"
