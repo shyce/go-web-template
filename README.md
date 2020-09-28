@@ -1,4 +1,4 @@
-# Go Project Template: Automatically compile as you code.
+# Go Web Template: Automatically compile typescript (optional) client and golang server as you code.
 ### Step 1: Copy file
 
 1. Copy `.env.example` file to `.env` 
