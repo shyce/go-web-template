@@ -1,8 +1,8 @@
-module github.com/shyce/potion-prophet
+module github.com/shyce/go-web-template
 
-go 1.15
+go 1.17
 
 require (
-	github.com/go-redis/redis/v8 v8.2.2
+	github.com/go-redis/redis/v8 v8.11.4
 	github.com/gorilla/mux v1.8.0
 )

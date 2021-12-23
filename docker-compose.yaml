@@ -2,13 +2,17 @@ version: "3.7"
 services:
 
     node:
-        build: ./docker/node
+        build:
+            context: ./docker/node
+            args:
+                UID: ${UID}
+                GID: ${GID}
         env_file: .env
-        user: "${UID}:${GID}"
-        stdin_open: true
         working_dir: /usr/src/app
         volumes:
             - ./client:/usr/src/app
+        extra_hosts:
+            - "${HOST}:0.0.0.0"
         ports:
             - "${PORT}:${PORT}"
 
