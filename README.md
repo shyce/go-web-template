@@ -13,8 +13,10 @@ The rest of the environment file is described below:
 |TRACE_PORT|3001|Port number for which pprof will run under. `ENVIRONMENT` variable must be set to `local`|
 |ENVIRONMENT|local|Can be used anywhere in the application. Currently only used to decide to run a secondary thread in Golang for another tracing webhost (pprof).
 |GO_BINARY|"go-web-template"|Name of binary produced by CompileDaemon. If you use this binary in production, you should disable `-race` mode in `./docker/golang/entrypoint.sh` and rebuild with `docker-compose build`
+|HOST|localhost|Host used to host webpack development server for live reloading. Do not use this server for production applications. Node container should not need to run in production because you should have a pipeline building the project in `./client/build/*` and running that under `WEB_PORT` using Golang above.
 |PORT|8080|Port used to host webpack development server for live reloading. Do not use this server for production applications. Node container should not need to run in production because you should have a pipeline building the project in `./client/build/*` and running that under `WEB_PORT` using Golang above.
 |TYPESCRIPT|true|If you remove the client directory using `rm -rf client/*` and re-run `docker-compose up -d`, this will reinstantiate the project with Create React App and use either typescript mode or not.
+|SCRIPTS_VERSION|4.0.3|Specify the version of react-scripts to use.
 
 
 ### Step 2: Run
@@ -24,7 +26,7 @@ docker-compose up -d
 ```
 
 ### Step 3: Code
-You can start changing `main.go` or adding and linking files. You may also hack away on the client and view the result at `http://localhost:<PORT>` To see logs, run:
+You can start changing `main.go` or adding and linking files. You may also hack away on the client and view the result at `http://<HOST>:<PORT>` To see logs, run:
 ```
 docker-compose logs -f
 ```
